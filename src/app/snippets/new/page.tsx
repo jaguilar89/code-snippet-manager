@@ -2,9 +2,15 @@
 
 import { createSnippet } from "@/actions/create-snippet";
 import { useFormState } from "react-dom";
+import { useState } from "react";
+import Editor from "@monaco-editor/react"
 
 export default function CreateSnippetPage() {
     const [formState, formAction] = useFormState(createSnippet, { errors: {} })
+    const [code, setCode] = useState("")
+    const handleEditorChange = (value: string = "") => {
+        setCode(value)
+    }
 
     return (
         <form action={formAction}>
@@ -24,10 +30,18 @@ export default function CreateSnippetPage() {
                     <label htmlFor="code">
                         Code
                     </label>
-                    <textarea
-                        id="snippet"
+                    <Editor
+                        height="40vh"
+                        theme="vs-dark"
+                        defaultLanguage="javascript"
+                        defaultValue="// type code here"
+                        onChange={handleEditorChange}
+                    />
+                    <input
+                        id="snippet" 
+                        type="hidden" // hidden in order to grab state value and pass to action since Editor is not a form element
                         name="snippet"
-                        className="border rounded"
+                        value={code}
                     />
                 </div>
                 <div>
@@ -48,4 +62,4 @@ export default function CreateSnippetPage() {
             </div>
         </form>
     )
-}
+};
