@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
+import SnippetShow from "@/components/snippet-show";
 
 interface SnippetPageProps {
     params: {
@@ -7,7 +8,7 @@ interface SnippetPageProps {
     }
 };
 
-export default async function ShowSnippetPage({ params }: SnippetPageProps) {
+export default async function SnippetShowPage({ params }: SnippetPageProps) {
     const { snippetId } = params;
 
     const snippet = await db.snippet.findFirst({
@@ -19,10 +20,6 @@ export default async function ShowSnippetPage({ params }: SnippetPageProps) {
     };
 
     return (
-        <div>
-            <h1>{snippet.title}</h1>
-            <h1>{snippet.code}</h1>
-            <h1>{snippet.note}</h1>
-        </div>
+        <SnippetShow snippet={snippet}/>
     )
 }

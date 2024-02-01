@@ -3,6 +3,7 @@
 import { createSnippet } from "@/actions/create-snippet";
 import { useFormState } from "react-dom";
 import { useState } from "react";
+import FormButton from "@/components/form-button";
 import Editor from "@monaco-editor/react"
 
 export default function CreateSnippetPage() {
@@ -38,7 +39,7 @@ export default function CreateSnippetPage() {
                         onChange={handleEditorChange}
                     />
                     <input
-                        id="snippet" 
+                        id="snippet"
                         type="hidden" // hidden in order to grab state value and pass to action since Editor is not a form element
                         name="snippet"
                         value={code}
@@ -55,9 +56,7 @@ export default function CreateSnippetPage() {
                     />
                 </div>
 
-                <button type="submit" className="border rounded p-2 w-1/2">
-                    Create
-                </button>
+                <FormButton> Create </FormButton>
 
             </div>
         </form>
