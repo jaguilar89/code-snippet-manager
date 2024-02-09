@@ -1,22 +1,35 @@
 'use client';
 
-import { createSnippet } from "@/actions";
-import { useFormState } from "react-dom";
+import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
-import FormButton from "@/components/form-button";
-import Editor from "@monaco-editor/react"
+import { useFormState } from "react-dom";
+import { editSnippet } from "@/actions";
+import FormButton from "./form-button";
 
-export default function CreateSnippetPage() {
-    const [formState, formAction] = useFormState(createSnippet, { errors: {} })
-    const [code, setCode] = useState("")
+interface SnippetProps {
+    snippet: {
+        id: number;
+        title: string;
+        code: string;
+        note: string;
+    }
+};
+
+export default function SnippetEditForm({ snippet }: SnippetProps) {
+    const id = snippet.id;
+    const [formState, formAction] = useFormState(
+        editSnippet.bind(null, { id }),
+        { errors: {} }
+    );
+
+    const [code, setCode] = useState(snippet.code);
     const handleEditorChange = (value: string = "") => {
         setCode(value)
     }
 
     return (
         <form action={formAction}>
-            <h1>Create a new Snippet</h1>
-            <div className="border rounded border-slate-500">
+            <div>
                 <div>
                     <label htmlFor="title">
                         Title
@@ -25,6 +38,7 @@ export default function CreateSnippetPage() {
                         id="title"
                         name="title"
                         className="border rounded"
+                        defaultValue={snippet.title}
                     />
                 </div>
                 <div>
@@ -35,7 +49,7 @@ export default function CreateSnippetPage() {
                         height="40vh"
                         theme="vs-dark"
                         defaultLanguage="javascript"
-                        defaultValue="// type code here"
+                        defaultValue={code}
                         onChange={handleEditorChange}
                     />
                     <input
@@ -53,12 +67,12 @@ export default function CreateSnippetPage() {
                         id="snippet-note"
                         name="snippet-note"
                         className="border rounded"
+                        defaultValue={snippet.note}
                     />
                 </div>
-
-                <FormButton> Create </FormButton>
-
             </div>
+
+            <FormButton> Submit </FormButton>
         </form>
     )
-};
+}

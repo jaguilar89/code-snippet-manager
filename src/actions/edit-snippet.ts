@@ -5,25 +5,26 @@ import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-interface CreateSnippetFormState {
+interface EditSnippetFormState {
     errors: {
         message?: string;
     }
 };
 
-export async function createSnippet(
-    formState: CreateSnippetFormState,
+export async function editSnippet(
+    { id }: { id: number },
+    formState: EditSnippetFormState,
     formData: FormData
 ) {
-
     const title = formData.get('title') as string;
     const code = formData.get('snippet') as string;
     const note = formData.get('snippet-note') as string;
 
     let codeSnippet: Snippet;
-
+    
     try {
-        codeSnippet = await db.snippet.create({
+        codeSnippet = await db.snippet.update({
+            where: { id },
             data: {
                 title,
                 code,
@@ -36,15 +37,14 @@ export async function createSnippet(
                 errors: {
                     message: err.message
                 }
-            };
+            }
         } else {
             return {
-                errors: {} //TODO: handle this section
+                errors: {}
             }
         }
-    }
+    };
 
-    revalidatePath(`/snippets/${codeSnippet.id}`)
-    redirect(`/snippets/${codeSnippet.id}`)
-
-};
+    revalidatePath(`/snippets/${id}`)
+    redirect(`/snippets/${id}`)
+}
