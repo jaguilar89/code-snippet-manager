@@ -1,7 +1,7 @@
 'use server';
 
 import type { Snippet } from "@prisma/client";
-import { db } from "@/db";
+import { prisma } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -23,7 +23,7 @@ export async function createSnippet(
     let codeSnippet: Snippet;
 
     try {
-        codeSnippet = await db.snippet.create({
+        codeSnippet = await prisma.snippet.create({
             data: {
                 title,
                 code,

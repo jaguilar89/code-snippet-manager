@@ -1,5 +1,5 @@
 import SnippetEditForm from "@/components/snippet-edit-form";
-import { db } from "@/db";
+import { prisma } from "@/db";
 import { notFound } from "next/navigation";
 
 interface SnippetPageProps {
@@ -11,7 +11,7 @@ interface SnippetPageProps {
 export default async function SnippetEditPage({ params }: SnippetPageProps) {
     const { snippetId } = params
 
-    const snippet = await db.snippet.findFirst({
+    const snippet = await prisma.snippet.findFirst({
         where: { id: Number(snippetId) }
     })
 

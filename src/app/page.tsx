@@ -1,9 +1,9 @@
 'use server'
 
-import { db } from "@/db";
+import { prisma } from "@/db";
 
 export default async function Home() {
-  let snippets = await db.snippet.findMany();
+  let snippets = await prisma.snippet.findMany();
 
   return (
       snippets.map((snip) => (

@@ -8,7 +8,7 @@ import Editor from "@monaco-editor/react"
 
 export default function CreateSnippetPage() {
     const [formState, formAction] = useFormState(createSnippet, { errors: {} })
-    const [code, setCode] = useState("")
+    const [code, setCode] = useState<string>("")
     const handleEditorChange = (value: string = "") => {
         setCode(value)
     }

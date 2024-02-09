@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { prisma } from "@/db";
 import { notFound } from "next/navigation";
 import SnippetShow from "@/components/snippet-show";
 
@@ -11,7 +11,7 @@ interface SnippetPageProps {
 export default async function SnippetShowPage({ params }: SnippetPageProps) {
     const { snippetId } = params;
 
-    const snippet = await db.snippet.findFirst({
+    const snippet = await prisma.snippet.findFirst({
         where: { id: Number(snippetId) }
     })
 
