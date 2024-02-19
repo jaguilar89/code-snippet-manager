@@ -57,8 +57,9 @@ export default function CreateSnippetPage() {
                 </div>
 
                 <FormButton> Create </FormButton>
-
             </div>
+            
+            {formState.errors.message}
         </form>
     )
 };

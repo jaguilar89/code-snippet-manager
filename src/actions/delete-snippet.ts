@@ -31,8 +31,8 @@ export async function deleteSnippet(
                 errors: {}
             }
         }
-    }
+    };
 
     revalidatePath("/");
     redirect("/")
-}
+};

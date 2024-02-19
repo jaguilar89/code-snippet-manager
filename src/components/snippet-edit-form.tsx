@@ -75,4 +75,4 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
             <FormButton> Submit </FormButton>
         </form>
     )
-}
+};
