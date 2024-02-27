@@ -19,7 +19,7 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
     const id = snippet.id;
     const [formState, formAction] = useFormState(
         editSnippet.bind(null, { id }),
-        { errors: {} }
+        { errors: { message: "" } }
     );
 
     const [code, setCode] = useState<string>(snippet.code);
@@ -70,9 +70,10 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
                         defaultValue={snippet.note}
                     />
                 </div>
+                <FormButton> Submit </FormButton>
             </div>
 
-            <FormButton> Submit </FormButton>
+            {formState.errors.message}
         </form>
     )
 };

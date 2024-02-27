@@ -28,7 +28,9 @@ export async function deleteSnippet(
             }
         } else {
             return {
-                errors: {}
+                errors: {
+                    message: 'Something went wrong...'
+                }
             }
         }
     };

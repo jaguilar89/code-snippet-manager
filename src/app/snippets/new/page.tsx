@@ -7,7 +7,7 @@ import FormButton from "@/components/form-button";
 import Editor from "@monaco-editor/react"
 
 export default function CreateSnippetPage() {
-    const [formState, formAction] = useFormState(createSnippet, { errors: {} })
+    const [formState, formAction] = useFormState(createSnippet, { errors: { message: "" } })
     const [code, setCode] = useState<string>("")
     const handleEditorChange = (value: string = "") => {
         setCode(value)
@@ -58,7 +58,7 @@ export default function CreateSnippetPage() {
 
                 <FormButton> Create </FormButton>
             </div>
-            
+
             {formState.errors.message}
         </form>
     )

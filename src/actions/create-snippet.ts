@@ -63,7 +63,9 @@ export async function createSnippet(
             };
         } else {
             return {
-                errors: {} //TODO: handle this section
+                errors: {
+                    message: 'Something went wrong...'
+                }
             }
         }
     }

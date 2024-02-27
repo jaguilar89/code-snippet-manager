@@ -64,7 +64,9 @@ export async function editSnippet(
             }
         } else {
             return {
-                errors: {}
+                errors: {
+                    message: 'Something went wrong...'
+                }
             }
         }
     };
