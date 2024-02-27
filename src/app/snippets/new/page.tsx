@@ -4,6 +4,7 @@ import { createSnippet } from "@/actions";
 import { useFormState } from "react-dom";
 import { useState } from "react";
 import FormButton from "@/components/form-button";
+import FormError from "@/components/form-error";
 import Editor from "@monaco-editor/react"
 
 export default function CreateSnippetPage() {
@@ -58,8 +59,7 @@ export default function CreateSnippetPage() {
 
                 <FormButton> Create </FormButton>
             </div>
-
-            {formState.errors.message}
+        <FormError errors={formState.errors.message} />
         </form>
     )
 };

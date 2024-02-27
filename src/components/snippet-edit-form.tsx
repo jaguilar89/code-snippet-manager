@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { editSnippet } from "@/actions";
 import FormButton from "./form-button";
+import FormError from "./form-error";
 
 interface SnippetProps {
     snippet: {
@@ -73,7 +74,7 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
                 <FormButton> Submit </FormButton>
             </div>
 
-            {formState.errors.message}
+            <FormError errors={formState.errors.message} />
         </form>
     )
 };
