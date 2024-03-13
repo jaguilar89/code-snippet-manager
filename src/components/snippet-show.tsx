@@ -19,7 +19,7 @@ export default function SnippetShow({ snippet }: SnippetProps) {
     const id = snippet.id;
     const [formState, formAction] = useFormState(
         deleteSnippet.bind(null, { id }),
-        { errors: {} })
+        { errors: { message: "" } })
 
     return (
         <div>
