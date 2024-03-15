@@ -8,9 +8,7 @@ export default async function Home() {
   return (
       snippets.map((snip) => (
         <div key={snip.id}>
-          <h1>{snip.title}</h1>
-          <h1>{snip.code}</h1>
-          <h1>{snip.note}</h1>
+          <a href={`/snippets/${snip.id}`}>{snip.title}</a>
         </div>
       ))
   )

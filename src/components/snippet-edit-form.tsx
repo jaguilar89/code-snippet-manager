@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { editSnippet } from "@/actions";
 import FormButton from "./form-button";
+import FormError from "./form-error";
 
 interface SnippetProps {
     snippet: {
@@ -19,7 +20,7 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
     const id = snippet.id;
     const [formState, formAction] = useFormState(
         editSnippet.bind(null, { id }),
-        { errors: {} }
+        { errors: { message: "" } }
     );
 
     const [code, setCode] = useState<string>(snippet.code);
@@ -70,9 +71,10 @@ export default function SnippetEditForm({ snippet }: SnippetProps) {
                         defaultValue={snippet.note}
                     />
                 </div>
+                <FormButton> Submit </FormButton>
             </div>
 
-            <FormButton> Submit </FormButton>
+            <FormError errors={formState.errors.message} />
         </form>
     )
-}
+};
