@@ -6,10 +6,12 @@ import { useState } from "react";
 import FormButton from "@/components/form-button";
 import FormError from "@/components/form-error";
 import Editor from "@monaco-editor/react"
+import LanguageDropdown from "@/components/language-dropdown";
 
 export default function CreateSnippetPage() {
-    const [formState, formAction] = useFormState(createSnippet, { errors: { message: "" } })
-    const [code, setCode] = useState<string>("")
+    const [formState, formAction] = useFormState(createSnippet, { errors: { message: "" } });
+    const [code, setCode] = useState<string>("");
+    const [language, setLanguage] = useState<string>("0");
 
     const handleEditorChange = (value: string = "") => {
         setCode(value)
@@ -29,6 +31,10 @@ export default function CreateSnippetPage() {
                         className="border rounded"
                     />
                 </div>
+
+                <label>Language</label>
+                <LanguageDropdown onLanguageSelect={setLanguage}/>
+
                 <div>
                     <label htmlFor="code">
                         Code
@@ -36,7 +42,7 @@ export default function CreateSnippetPage() {
                     <Editor
                         height="40vh"
                         theme="vs-dark"
-                        defaultLanguage="javascript"
+                        language={language}
                         defaultValue="// type code here"
                         onChange={handleEditorChange}
                     />

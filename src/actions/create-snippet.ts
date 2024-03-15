@@ -11,10 +11,12 @@ const SnippetSchema = z.object({
     code: z.object({
         value: z.string().min(1, { message: 'Code Editor must not be empty.' })
     }),
+    language: z.string(),
     note: z.object({
         value: z.string().min(3, { message: 'Note must be at least 3 characters in length.' })
     })
 });
+
 interface CreateSnippetFormState {
     errors: {
         message?: string[] | string;
@@ -31,6 +33,7 @@ export async function createSnippet(
         code: {
             value: formData.get('snippet')
         },
+        language: formData.get('language'),
         note: {
             value: formData.get('snippet-note')
         }
@@ -53,6 +56,7 @@ export async function createSnippet(
             data: {
                 title: result.data.title,
                 code: result.data.code.value,
+                language: result.data.language,
                 note: result.data.note.value
             }
         })

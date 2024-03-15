@@ -11,6 +11,7 @@ interface SnippetProps {
         id: number;
         title: string;
         code: string;
+        language: string;
         note: string;
     }
 };
@@ -35,6 +36,7 @@ export default function SnippetShow({ snippet }: SnippetProps) {
             <Editor
                 height="40vh"
                 theme="vs-dark"
+                language={snippet.language}
                 value={snippet.code}
                 options={
                     {

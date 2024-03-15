@@ -1,4 +1,10 @@
-export default function LanguageDropdown() {
+import { Dispatch, SetStateAction } from "react";
+
+interface LanguageDropdownProps {
+    onLanguageSelect: Dispatch<SetStateAction<string>>;
+};
+
+export default function LanguageDropdown({onLanguageSelect}: LanguageDropdownProps) {
     const programmingLanguages = [
         "plaintext",
         "abap",
@@ -92,14 +98,13 @@ export default function LanguageDropdown() {
         "json"
     ];
 
-    const languageOptions = programmingLanguages.map((lang, index) => (
-        <option value={index + 1}>{lang}</option>
+    const languageOptions = programmingLanguages.map((lang) => (
+        <option key={lang} value={lang}>{lang}</option>
     ))
 
     return (
         <>
-            <label>Language</label>
-            <select>
+            <select onChange={(e) => onLanguageSelect(e.target.value)} name="language">
                 {languageOptions}
             </select>
         </>
