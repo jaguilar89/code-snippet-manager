@@ -1,4 +1,5 @@
 import Link from "next/link"
+import HeaderAuth from "./header-auth"
 
 export default function Header() {
     return (
@@ -9,6 +10,7 @@ export default function Header() {
             <Link href="/snippets/new">
                 <button className="border rounded bg-cyan-300">Add New Snippet</button>
             </Link>
+            <HeaderAuth />
         </div>
     )
 }
